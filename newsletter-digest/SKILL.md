@@ -6,7 +6,7 @@ metadata: {"openclaw":{"requires":{"bins":["gog","mkdir"]}}}
 
 ## What it does
 
-Searches your work email for newsletters from tracked sources, extracts and prioritizes items by relevance, and writes a curated daily digest. Run daily as part of your morning routine, or on-demand for a specific date.
+Searches your email for newsletters from tracked sources, extracts and prioritizes items by relevance, and writes a curated daily digest. Run daily as part of your morning routine, or on-demand for a specific date.
 
 See USER.md for background, interests, and current work context — use that to judge relevance and priority.
 
@@ -14,14 +14,14 @@ See USER.md for background, interests, and current work context — use that to 
 
 ## Configuration
 
-Before using this skill, set your work email account:
+Before using this skill, set your email account:
 
 ```bash
 # In your TOOLS.md or environment, set:
-WORK_EMAIL=your-email@company.com
+EMAIL_ACCOUNT=your-email@example.com
 ```
 
-Then replace `YOUR_WORK_EMAIL` references below with your actual email.
+Then replace `YOUR_EMAIL_ACCOUNT` references below with your actual email.
 
 ## Inputs
 
@@ -53,14 +53,14 @@ mkdir -p ~/SecondBrain/Newsletter\ Digest
 
 ### Step 2: Search for newsletters
 
-For each source in the table above, search work email:
+For each source in the table above, search email:
 
 ```bash
 # Default (all inbox emails):
-gog gmail search 'in:inbox from:dan@tldrnewsletter.com' --max 10 --account YOUR_WORK_EMAIL
+gog gmail search 'in:inbox from:dan@tldrnewsletter.com' --max 10 --account YOUR_EMAIL_ACCOUNT
 
 # With --days N restriction:
-gog gmail search 'in:inbox from:dan@tldrnewsletter.com newer_than:Nd' --max 10 --account YOUR_WORK_EMAIL
+gog gmail search 'in:inbox from:dan@tldrnewsletter.com newer_than:Nd' --max 10 --account YOUR_EMAIL_ACCOUNT
 ```
 
 Replace `N` with the `--days` value and substitute each source's sender pattern.
@@ -70,7 +70,7 @@ Replace `N` with the `--days` value and substitute each source's sender pattern.
 For each newsletter found:
 
 ```bash
-gog gmail get <message-id> --account YOUR_WORK_EMAIL
+gog gmail get <message-id> --account YOUR_EMAIL_ACCOUNT
 ```
 
 ### Step 4: Extract and prioritize
@@ -119,7 +119,7 @@ Content guidance:
 After the digest is written successfully, archive each processed newsletter:
 
 ```bash
-gog gmail thread modify <thread-id> --remove INBOX --account YOUR_WORK_EMAIL
+gog gmail thread modify <thread-id> --remove INBOX --account YOUR_EMAIL_ACCOUNT
 ```
 
 ## Output format
